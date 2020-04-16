@@ -4,7 +4,7 @@ import random
 window = tk.Tk()
 
 window.title("Password generator")
-window.geometry("350x120")
+window.geometry("450x300")
 
 
 one = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -17,7 +17,7 @@ seven = ['~','@','!','#','$','%','^','&','*','(',')','-','_','=','+',':',';',','
 eight = ['~','@','!','#','$','%','^','&','*','(',')','-','_','=','+',':',';',',','.','<','>','/','?']
 nine = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 ten = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-	    
+
 a = one[random.randint(0, 25)]
 b = two[random.randint(0, 25)]
 c = three[random.randint(0, 9)]
@@ -32,50 +32,74 @@ j = ten[random.randint(0, 25)]
 x = a+b+c+d+e+f+g+h+i+j
 
 
-Generate = tk.Label(text="Here is your randomly generated password:")
+Generate = tk.Label(text="Here is your randomly generated password:") 
 Generate.grid(column=3, row=3)
 
 UserName = tk.StringVar()
 WebSite = tk.StringVar()
 
-passw = tk.Label(text=x)
+passw = tk.Label(text=x) 
 passw.grid(column=3, row=4)
-
-UserN = tk.Label(text="Username/Email")
+UserN = tk.Label(text="Username/Email") 
 UserN.grid(column=2, row=5)
 
 username = tk.Entry(window, width=30, textvariable=UserName)
 username.grid(column=3, row=5)
-
 WebS = tk.Label(text="Website Name")
 WebS.grid(column=2, row=6)
 
 website = tk.Entry(window, width=30, textvariable=WebSite)
 website.grid(column=3, row=6)
 
+
+
 def storeinfo():
-    logininfo = open("LoginInfo.txt", "a")
-    logininfo.write("\nPassword: "+x+"# Username: "+UserName.get()+"# Website: "+WebSite.get())
+    with open("LoginInfo.txt", "a") as logininfo:
+        logininfo.write('%s,%s,%s\n' % (WebSite.get(), UserName.get(), x))
 
 save = tk.Button(text="Save Info", command=storeinfo)
 save.grid(column=3, row=8)
 
 searchentry = tk.StringVar()
 
-searche = tk.Entry(window, width=30, textvariable=searchentry)
-searche.grid(column=3, row=10)
+searchent = tk.Entry(textvariable=searchentry)
+searchent.grid(column=3, row=11)
 
 
 
 def search():
-	with open("LoginInfo.txt") as fo:
-		for rec in fo:
-			if rec == searchentry.get():
-				print("Working")
+    with open("LoginInfo.txt") as fo:
+        for rec in fo:
+            tokens = rec.strip().split(',', 2) # split to maximum three tokens
+            if tokens[0] == searchentry.get():
+                searches = tk.Label(text=rec)
+                searches.grid(column=3, row=12)
 
 
-searchb = tk.Button(master=window, width=10, text="search", command=search)
-searchb.grid(column=4, row=10)
+searchbutton = tk.Button( width=10, text="search", command=search)
+searchbutton.grid(column=4, row=11)
 
+def custompass():
+    anc = tk.StringVar()
+    custompass1 = tk.Entry(text="Add a custom password", textvariable=x)
+    custompass1.grid(column=3, row=15)
+    custompasslabel1 = tk.Label(text="Password: ")
+    custompasslabel1.grid(column=2, row=15)
+    custompass2 = tk.Entry(text="Add Username/Email", textvariable=UserName)
+    custompass2.grid(column=3, row=16)
+    custompasslabel2 = tk.Label(text="Username/Email: ")
+    custompasslabel2.grid(column=2, row=16)
+    custompass3 = tk.Entry(text="Add website name", textvariable=WebSite)
+    custompass3.grid(column=3, row=17)
+    custompasslabel1 = tk.Label(text="Website: ")
+    custompasslabel1.grid(column=2, row=17)
+    submitbutton = tk.Button(text="Submit", command=storeinfo)
+    submitbutton.grid(column=3, row=18)
+    storeinfo()
+
+
+
+custompassb = tk.Button(text="Add a custom password", command=custompass)
+custompassb.grid(column=3, row=14)
 
 window.mainloop()
