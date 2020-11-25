@@ -6,30 +6,15 @@ window = tk.Tk()
 window.title("Password generator")
 window.geometry("450x300")
 
+garbagelist = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','~','@','!','#','$','%','^','&','*','(',')','-','_','=','+',':',';',',','.','<','>','/','?','1','2','3','4','5','6','7','8','9','0']
 
-one = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-two = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-three = ['1','2','3','4','5','6','7','8','9','0']
-four = ['~','@','!','#','$','%','^','&','*','(',')','-','_','=','+',':',';',',','.','<','>','/','?']
-five = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-six = ['1','2','3','4','5','6','7','8','9','0']
-seven = ['~','@','!','#','$','%','^','&','*','(',')','-','_','=','+',':',';',',','.','<','>','/','?']
-eight = ['~','@','!','#','$','%','^','&','*','(',')','-','_','=','+',':',';',',','.','<','>','/','?']
-nine = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-ten = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+numberclusterfuck = []
 
-a = one[random.randint(0, 25)]
-b = two[random.randint(0, 25)]
-c = three[random.randint(0, 9)]
-d = four[random.randint(0, 22)]
-e = five[random.randint(0, 25)]
-f = six[random.randint(0, 9)]
-g = seven[random.randint(0, 22)]
-h = eight[random.randint(0, 22)]
-i = nine[random.randint(0, 25)]
-j = ten[random.randint(0, 25)]
-
-x = a+b+c+d+e+f+g+h+i+j
+for i in range(0,10):
+    numberclusterfuck.append(random.choice(garbagelist))
+x = ""
+for i in range(0,10):
+    x = x+numberclusterfuck[i]
 
 
 Generate = tk.Label(text="Here is your randomly generated password:") 
